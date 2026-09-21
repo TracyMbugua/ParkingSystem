@@ -1,0 +1,32 @@
+1. Slot Monitoring and Display Module
+	
+	
+    i. Initialize Total_Slots_Capacity (from configuration).
+    ii. Initialize Occupied_Slots_Count to 0.
+    iii. Whenever a vehicle enters (triggering Entry Module), increment Occupied_Slots_Count.
+    iv. Whenever a vehicle exits (triggering Exit Module), decrement Occupied_Slots_Count.
+    v. Display Logic: {Available Slots} = {Total_Slots_Capacity} - {Occupied_Slots_Count}. 
+
+ 
+2. Entry and Vehicle Registration Module 
+	
+	
+    a) Capture Vehicle Identifier (Number Plate).
+    b) Capture Timestamp {TimeIn}.
+    c) Validate Vehicle ID against known lists (if applicable).
+    d) Create a ParkingSession object: {VehicleID, TimeIn}, {Status}={Active}.
+    e) Store this object in the active session database/list.
+    f) Trigger the Slot Monitoring Module (increment counter).
+
+3. Exit and Parking Fee calculation Module
+
+	
+   i. Capture Vehicle Identifier (ID to locate session).
+   ii. Retrieve TimeIn from the active session database using ID.
+   iii. Capture Current Timestamp TimeOut.
+   iv. Duration Calculation: {Duration} = {TimeOut} - {TimeIn}.
+   v. Fee Calculation (Rate Logic): {Cost} = {Duration},{RateStructure}.
+   vi. Update the session record: {TimeOut},{TotalTime},{FeeDue}={Cost}.
+   vii. Trigger the Slot Monitoring Module (decrement counter).
+
+    
